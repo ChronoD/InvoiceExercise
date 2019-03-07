@@ -5,58 +5,54 @@ import java.util.Optional;
 
 import lt.vtmc.an.SaskaitaFaktura.model.Invoice;
 import lt.vtmc.an.SaskaitaFaktura.repository.InvoiceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InvoiceServiceImpl implements InvoiceService {
-private InvoiceRepository invoiceRepo;
+    @Autowired
+    private InvoiceRepository invoiceRepo;
+
+    @Override
+    public List<Invoice> listAllInvoices() {
+        return invoiceRepo.findAll();
+    }
 
 
-/* (non-Javadoc)
- * @see lt.vtmc.an.SaskaitaFaktura.service.InvoiceService#listAllInvoices()
- */
-@Override
-public List<Invoice> listAllInvoices(){
-return	invoiceRepo.findAll();
-}
-	
+    @Override
+    public Optional<Invoice> findInvoiceById(Long id) {
+        return invoiceRepo.findById(id);
+    }
 
 
-/* (non-Javadoc)
- * @see lt.vtmc.an.SaskaitaFaktura.service.InvoiceService#findInvoiceById(java.lang.Long)
- */
-@Override
-public Optional<Invoice> findInvoiceById(Long id){
-	return invoiceRepo.findById(id);
-}
-	
-
-/* (non-Javadoc)
- * @see lt.vtmc.an.SaskaitaFaktura.service.InvoiceService#createInvoice(lt.vtmc.an.SaskaitaFaktura.model.Invoice)
- */
-@Override
-public void createInvoice(Invoice invoice) {
-	invoiceRepo.save(invoice);
-}
-
-//
-//public Invoice editInvoiceById(Long id, Invoice invoice) {
-//	Optional<Invoice> getRecord = findInvoiceById(id);
-//	Invoice recordToEdit= getRecord.get();
-//	if (invoice.)
-//	
-//	
-//}
-	
-
-/* (non-Javadoc)
- * @see lt.vtmc.an.SaskaitaFaktura.service.InvoiceService#deleteInvoiceById(java.lang.Long)
- */
-@Override
-public void deleteInvoiceById(Long id) {
-	invoiceRepo.deleteById(id);
-}
+    @Override
+    public void createInvoice(Invoice invoice) {
+        invoiceRepo.save(invoice);
+    }
 
 
+    public Invoice editInvoiceById(Long id, Invoice invoice) {
 
+        Optional<Invoice> getRecord = findInvoiceById(id);
+        Invoice recordToEdit = getRecord.get();
+        if (invoice.getIssuingCompany() != null)
+            recordToEdit.setIssuingCompany(invoice.getIssuingCompany());
+        if (invoice.getRecipient() != null)
+            recordToEdit.setRecipient(invoice.getRecipient());
+        if (invoice.getNumber() != null)
+            recordToEdit.setNumber(invoice.getNumber());
+        if (invoice.getDateIssued() != null)
+            recordToEdit.setDateIssued(invoice.getDateIssued());
+        invoiceRepo.save(recordToEdit);
+        return recordToEdit;
+
+    }
+
+
+    @Override
+    public void deleteInvoiceById(Long id) {
+        invoiceRepo.deleteById(id);
+    }
 
 
 }

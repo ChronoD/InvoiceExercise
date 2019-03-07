@@ -7,12 +7,14 @@ import lt.vtmc.an.SaskaitaFaktura.model.Invoice;
 
 public interface InvoiceService {
 
-	List<Invoice> listAllInvoices();
+    List<Invoice> listAllInvoices();
 
-	Optional<Invoice> findInvoiceById(Long id);
+    Optional<Invoice> findInvoiceById(Long id);
 
-	void createInvoice(Invoice invoice);
+    void createInvoice(Invoice invoice);
 
-	void deleteInvoiceById(Long id);
+    Invoice editInvoiceById(Long id, Invoice invoice);
+
+    void deleteInvoiceById(Long id);
 
 }

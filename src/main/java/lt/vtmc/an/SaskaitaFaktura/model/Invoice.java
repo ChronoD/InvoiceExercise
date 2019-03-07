@@ -1,5 +1,6 @@
 package lt.vtmc.an.SaskaitaFaktura.model;
 
+import io.swagger.annotations.Api;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,12 +17,11 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
-    private String number;
-    private Date dateIssued;
     private String issuingCompany;
     private String recipient;
-//private Collection<?> items;
-
+    private String number;
+    private Date dateIssued;
+    //private Collection<?> items;
 
     public Invoice(String issuingCompany, String recipient, String number, Date dateIssued) {
         this.number = number;
@@ -29,4 +29,6 @@ public class Invoice {
         this.issuingCompany = issuingCompany;
         this.recipient = recipient;
     }
+
+
 }
