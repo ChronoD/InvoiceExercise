@@ -1,6 +1,5 @@
 package lt.vtmc.an.SaskaitaFaktura.model;
 
-import io.swagger.annotations.Api;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class Invoice {
     private String recipient;
     private String number;
     private Date dateIssued;
-    //private Collection<?> items;
+    private Collection<Item> items = new ArrayList<>();
 
     public Invoice(String issuingCompany, String recipient, String number, Date dateIssued) {
         this.number = number;
