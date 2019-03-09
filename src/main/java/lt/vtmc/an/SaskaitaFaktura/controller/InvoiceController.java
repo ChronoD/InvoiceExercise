@@ -29,7 +29,7 @@ public class InvoiceController {
 
 
     @ApiOperation(value = "Get all invoices", notes = "Returns all recorded invoices.")
-    @GetMapping({"","/all", "/list"})
+    @GetMapping({"","/all"})
     public ResponseEntity<?> listAllInvoices() {
         return new ResponseEntity<>(invoiceService.listAllInvoices(), HttpStatus.FOUND);
     }

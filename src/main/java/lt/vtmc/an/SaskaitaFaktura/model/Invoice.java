@@ -23,7 +23,7 @@ public class Invoice {
     private String recipient;
     private String number;
     private Date dateIssued;
-    private Collection<Item> items = new ArrayList<>();
+    //private Collection<Item> items = new ArrayList<>();
 
     public Invoice(String issuingCompany, String recipient, String number, Date dateIssued) {
         this.number = number;
