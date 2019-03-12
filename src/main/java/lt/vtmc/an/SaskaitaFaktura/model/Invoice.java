@@ -22,7 +22,7 @@ public class Invoice {
     private String number;
     @Temporal(TemporalType.DATE)
     private Date dateIssued;
-    @OneToOne(mappedBy = "invoice", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Item item;
 
     public Invoice(String issuingCompany, String recipient, String number, Date dateIssued) {

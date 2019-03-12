@@ -55,25 +55,25 @@ public class Application {
             Invoice katpedele = new Invoice("Katpedele", "VTMC", "AC5564658", new Date(2019 - 03 - 01));
             Invoice vilpra = new Invoice("Vilpra", "VTMC", "00115", new Date(2019 - 02 - 02));
 
-            Item kastuvas = new Item("kastuvas", 16, 17.88);
-            Item muiline = new Item("muiline", 10, 6.00);
-            Item pjuklelis = new Item("pjuklelis", 3, 9.09);
+//            Item kastuvas = new Item("kastuvas", 16, 17.88);
+//            Item muiline = new Item("muiline", 10, 6.00);
+           Item pjuklelis = new Item("pjuklelis", 3, 9.09);
            Item krapstukai = new Item("krapstukai", 123, 1.99);
-            Invoice sigmute = new Invoice("Sigmute", "VTMC", "116565", new Date(2019 - 03 - 06), kastuvas);
-
+//            //Invoice sigmute = new Invoice("Sigmute", "VTMC", "116565", new Date(2019 - 03 - 06), kastuvas);
+//
        vilpra.setItem(krapstukai);
-            invoiceRepository.save(vilpra);
+           invoiceRepository.save(vilpra);
             invoiceRepository.save(senukai);
-            invoiceRepository.save(sigmute);
-            invoiceRepository.save(katpedele);
-
-            pjuklelis.setInvoice(vilpra);
-
-            itemRepository.save(pjuklelis);
-            itemRepository.save(krapstukai);
-            itemRepository.save(muiline);
-            itemRepository.save(kastuvas);
-        };
+//            //invoiceRepository.save(sigmute);
+           invoiceRepository.save(katpedele);
+//
+           pjuklelis.setInvoice(vilpra);
+//
+//            itemRepository.save(pjuklelis);
+//            itemRepository.save(krapstukai);
+//            itemRepository.save(muiline);
+//            itemRepository.save(kastuvas);
+     };
     }
 
 

@@ -1,5 +1,6 @@
 package lt.vtmc.an.SaskaitaFaktura.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,13 +14,14 @@ import java.math.BigDecimal;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "item_id")
+    @Column
     private Long id;
     private String name;
     private int quantity;
     private double price;
 
-      @OneToOne
+      @OneToOne(mappedBy="item")
+      @JsonIgnore
       private Invoice invoice;
 
 

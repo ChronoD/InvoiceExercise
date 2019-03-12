@@ -86,7 +86,7 @@ public class InvoiceController {
     }
     @ApiOperation(value = "Post an item", notes = "Posts an item")
     @PostMapping("/items")
-    public ResponseEntity<?> postAnItem(lt.vtmc.an.SaskaitaFaktura.model.Item item) {
+    public ResponseEntity<?> postAnItem(@RequestBody lt.vtmc.an.SaskaitaFaktura.model.Item item) {
         itemService.createItem(item);
         return new ResponseEntity<>(item, HttpStatus.CREATED);
     }
