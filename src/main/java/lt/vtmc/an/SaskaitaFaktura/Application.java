@@ -1,7 +1,9 @@
 package lt.vtmc.an.SaskaitaFaktura;
 
 import lt.vtmc.an.SaskaitaFaktura.model.Invoice;
+import lt.vtmc.an.SaskaitaFaktura.model.Item;
 import lt.vtmc.an.SaskaitaFaktura.repository.InvoiceRepository;
+import lt.vtmc.an.SaskaitaFaktura.repository.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
 import java.util.Date;
 
 @EnableSwagger2
@@ -26,14 +29,15 @@ public class Application {
 
 
     @Bean
-            public Docket api() {
-                return new Docket(DocumentationType.SWAGGER_2)
-                        .select()
-                        .apis(RequestHandlerSelectors.any())
-                        .paths(PathSelectors.any())
-                        .build();
-            }
+    public Docket api() {
 
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
 
 
     private ApiInfo apiInfo() {
@@ -44,13 +48,31 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner demo(InvoiceRepository invoiceRepository) {
+    public CommandLineRunner demo(InvoiceRepository invoiceRepository, ItemRepository itemRepository) {
         return (args) -> {
             // make entries to database
-            invoiceRepository.save(new Invoice("Senukai", "VTMC", "8489--5", new Date(2019 - 02 - 1)));
-            invoiceRepository.save(new Invoice("Katpedele", "VTMC", "AC5564658", new Date(2019 - 03 - 01)));
-            invoiceRepository.save(new Invoice("Sigmute", "VTMC", "116565", new Date(2019 - 03 - 06)));
-            invoiceRepository.save(new Invoice("Vilpra", "VTMC", "00115", new Date(2019 - 02 - 02)));
+            Invoice senukai = new Invoice("Senukai", "VTMC", "8489--5", new Date(2019 - 02 - 1));
+            Invoice katpedele = new Invoice("Katpedele", "VTMC", "AC5564658", new Date(2019 - 03 - 01));
+            Invoice vilpra = new Invoice("Vilpra", "VTMC", "00115", new Date(2019 - 02 - 02));
+
+            Item kastuvas = new Item("kastuvas", 16, 17.88);
+            Item muiline = new Item("muiline", 10, 6.00);
+            Item pjuklelis = new Item("pjuklelis", 3, 9.09);
+           Item krapstukai = new Item("krapstukai", 123, 1.99);
+            Invoice sigmute = new Invoice("Sigmute", "VTMC", "116565", new Date(2019 - 03 - 06), kastuvas);
+
+       vilpra.setItem(krapstukai);
+            invoiceRepository.save(vilpra);
+            invoiceRepository.save(senukai);
+            invoiceRepository.save(sigmute);
+            invoiceRepository.save(katpedele);
+
+            pjuklelis.setInvoice(vilpra);
+
+            itemRepository.save(pjuklelis);
+            itemRepository.save(krapstukai);
+            itemRepository.save(muiline);
+            itemRepository.save(kastuvas);
         };
     }
 

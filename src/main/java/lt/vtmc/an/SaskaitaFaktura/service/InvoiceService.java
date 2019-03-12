@@ -1,9 +1,9 @@
 package lt.vtmc.an.SaskaitaFaktura.service;
 
+import lt.vtmc.an.SaskaitaFaktura.model.Invoice;
+
 import java.util.List;
 import java.util.Optional;
-
-import lt.vtmc.an.SaskaitaFaktura.model.Invoice;
 
 public interface InvoiceService {
 
